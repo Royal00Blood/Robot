@@ -8,10 +8,14 @@ class MinimalSubscriber(Node):
         super().__init__('py_topic_subscriber_spiral')
         self.subscriber_ = self.create_subscription(LaserScan, '/scan', self.subscribe_message, 1)
         self.subscriber_  # prevent unused variable warning
+        self.laser_renge = []
 
     def subscribe_message(self, msg):
-        self.get_logger().info('Ranges vector: %f' % (LaserScan.range_max))
-        
+        self.get_logger().info('ranges: %f' % (msg.range_max))
+        for i in range(len(msg.ranges)):
+            self.laser_renge.append(msg.ranges[i])
+        print(self.laser_renge)
+
 
 def main(args=None):
     rclpy.init(args=args)
