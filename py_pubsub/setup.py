@@ -20,9 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'talker = py_pubsub.publisher_member_function:main',
-            'listener = py_pubsub.subscriber_member_function:main',
             'robot_control = py_pubsub.pub_robot_move_control:main',
+            'laser_take = py_pubsub.laser_sensor_get:main',
         ],
     },
 )
