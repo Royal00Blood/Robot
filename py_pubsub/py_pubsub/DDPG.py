@@ -7,8 +7,6 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 
-def Env_take_info():
-    state = 1##############
-    action = 1###########
-    reward = 2##################
-    return state, action, reward
+def Env_take_info(new_state):
+    state = new_state
+    
