@@ -24,6 +24,7 @@ setup(
             'laser_take = py_pubsub.laser_sensor_get:main',
             'robot_control_sub = py_pubsub.sub_robot_move_control:main',
             'rundom_run = py_pubsub.random_double_do:main',
+            'position = py_pubsub.position:main',
         ],
     },
 )
