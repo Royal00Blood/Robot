@@ -10,7 +10,7 @@ class SubPosition(Node):
         self.subscriber_ = self.create_subscription(PoseStamped, '/goal_pose',self.subscribe_message, 1)
         self.subscriber_
     def subscribe_message(self,msg):
-        self.get_logger().info('Recieved - Linear Velocity: %f,Angular Velocity: %f'%(msg.linear.x,msg.angular.z))
+        self.get_logger().info('Recieved - Linear Velocity x: %f,Linear Velocity y: %f,Angular Velocity x: %f,Angular Velocity y: %f,Angular Velocity z: %f'%(msg.linear.x,msg.linear.y, msg.angular.x,msg.angular.y,msg.angular.z))
 
 
 def main(args=None):
