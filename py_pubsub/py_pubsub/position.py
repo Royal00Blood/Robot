@@ -1,24 +1,32 @@
 # geometry_msgs/msg/PoseStamped
 import rclpy
-from rclpy.node import Node 
-from geometry_msgs.msg import PoseStamped
+from rclpy.node import Node
+from nav_msgs.msg import Odometry
 
-class SubPosition(Node):
+class MinimalSubscriber(Node):
 
     def __init__(self):
-        super().__init__('position_rob_sub')
-        self.subscriber_ = self.create_subscription(PoseStamped, '/goal_pose',self.subscribe_message, 1)
-        self.subscriber_
-    def subscribe_message(self,msg):
-        self.get_logger().info('Recieved - Linear Velocity x: %f,Linear Velocity y: %f,Angular Velocity x: %f,Angular Velocity y: %f,Angular Velocity z: %f'%(msg.linear.x,msg.linear.y, msg.angular.x,msg.angular.y,msg.angular.z))
+        super().__init__('py_topic_subscriber_spiral')
+        self.subscriber_ = self.create_subscription(Odometry, '/odom', self.subscribe_message, 1)
+        self.subscriber_  # prevent unused variable warning
+        
+
+    def subscribe_message(self, msg):
+        x = msg.pose.pose.position.x
+        y = msg.pose.pose.position.y
+        q1 = msg.pose.pose.orientation.x
+        q2 = msg.pose.pose.orientation.y
+        q3 = msg.pose.pose.orientation.z
+        q4 = msg.pose.pose.orientation.w
+        self.get_logger().info('ranges: %f' % (msg.pose.pose.position.x))
 
 
 def main(args=None):
     rclpy.init(args=args)
-    sub = SubPosition()
-    rclpy.spin(sub)
-    sub.destroy_node()
+    minimal_subscriber = MinimalSubscriber()
+    rclpy.spin(minimal_subscriber)
+    minimal_subscriber.destroy_node()
     rclpy.shutdown()
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     main()
